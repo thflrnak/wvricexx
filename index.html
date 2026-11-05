@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8"><title>트위터</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{--bg:#fff;--fg:#0f1419;--mu:#536471;--ln:#eff3f4;--bl:#1d9bf0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#000;--fg:#e7e9ea;--mu:#71767b;--ln:#2f3336;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#000;--fg:#e7e9ea;--mu:#71767b;--ln:#2f3336;color-scheme:dark}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{height:100%;height:100dvh;margin:0;background:var(--bg);overflow:hidden;-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:var(--fg);font-size:15px}
+#phone{position:relative;width:100%;max-width:430px;height:100%;max-height:900px;margin:0 auto;display:flex;flex-direction:column;background:var(--bg);overflow:hidden}
+@media(min-width:500px){#phone{border:1px solid var(--ln);border-radius:28px;margin-top:10px;height:calc(100% - 20px)}}
+button{background:none;border:0;color:inherit;font:inherit;cursor:pointer;padding:0}
+#status{display:flex;justify-content:center;align-items:center;gap:10px;padding:8px 0 4px;font-weight:600;font-size:14px;position:relative}
+.xl{position:absolute;right:16px}
+.screen{flex:1;display:flex;flex-direction:column;min-height:0}.screen[hidden]{display:none}
+.top{display:flex;align-items:center;gap:12px;padding:6px 14px}
+.sf{flex:1;display:flex;align-items:center;gap:8px;background:var(--ln);border-radius:999px;padding:10px 14px;font-size:17px}
+.tabs{display:flex;border-bottom:1px solid var(--ln)}
+.tabs div{flex:1;text-align:center;padding:14px 0 12px;color:var(--mu);font-weight:500;font-size:15px;position:relative}
+.tabs .on{color:var(--fg);font-weight:700}.tabs .on:after{content:"";position:absolute;left:25%;right:25%;bottom:0;height:3px;border-radius:3px;background:var(--fg)}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-width:none}.scroll::-webkit-scrollbar{display:none}
+.it{display:flex;gap:10px;padding:12px 14px;border-bottom:1px solid var(--ln)}
+.it.re{margin-left:28px;border-left:2px solid var(--ln)}
+.av{width:40px;height:40px;flex:none;border-radius:50%}
+.bd{flex:1;min-width:0}.hd{display:flex;align-items:center;gap:4px;white-space:nowrap;overflow:hidden}
+.hd b{overflow:hidden;text-overflow:ellipsis}.m{color:var(--mu);overflow:hidden;text-overflow:ellipsis}
+.tx{white-space:pre-wrap;word-break:break-word;line-height:1.4;margin-top:2px;font-size:15px}
+.bar{display:flex;justify-content:space-between;color:var(--mu);margin-top:10px;font-size:13px;padding-right:6px}
+.bar>*{display:flex;align-items:center;gap:5px;min-width:44px;min-height:36px}@media(max-width:380px){.bar{font-size:12px}.tabs div{font-size:14px}.tx{font-size:14.5px}}
+.bar .on.h{color:#f91880}.bar .on.r{color:#00ba7c}
+.fab{position:absolute;right:16px;bottom:78px;width:56px;height:56px;border-radius:50%;background:var(--bl);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px #0004}
+nav{display:flex;justify-content:space-around;padding:12px 0;flex:none;border-top:1px solid var(--ln);background:var(--bg)}
+nav span{position:relative}nav i{position:absolute;top:-8px;right:-10px;background:var(--bl);color:#fff;font-style:normal;font-size:11px;border-radius:9px;padding:1px 6px}
+.dh{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;font-weight:700;font-size:18px}
+.big{padding:12px 16px;border-bottom:1px solid var(--ln)}
+.big .tx{font-size:19px;margin:16px 0}
+.fl{background:var(--fg);color:var(--bg);border-radius:999px;padding:8px 16px;font-weight:700}
+.meta{color:var(--mu);margin-bottom:12px}
+.rb{display:flex;align-items:center;gap:10px;padding:8px 14px;border-top:1px solid var(--ln)}
+.rb div{flex:1;background:var(--ln);color:var(--mu);border-radius:999px;padding:11px 16px}
+.more{padding:14px 16px;font-weight:700;border-bottom:1px solid var(--ln)}.rb[hidden]{display:none}.rb input{flex:1;min-width:0;background:var(--ln);color:var(--fg);border:0;border-radius:999px;padding:11px 16px;font:inherit;font-size:16px;outline:0}.rb button{background:var(--bl);color:#fff;border-radius:999px;padding:10px 14px;font-weight:700;opacity:.45;flex:none}.rb button.on{opacity:1}.qc{border:1px solid var(--ln);border-radius:16px;padding:12px;margin-top:10px}.qt{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}.st{position:sticky;top:0;background:var(--bg);z-index:2}.st div{display:flex;justify-content:center;align-items:center;gap:8px}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs><clipPath id="cc"><circle cx="20" cy="20" r="20"/></clipPath>
+<symbol id="av" viewBox="0 0 40 40"><g clip-path="url(#cc)"><rect width="40" height="40" fill="#cfd9de"/><rect x="12.5" y="8" width="15" height="18" rx="7.5" fill="#6b7a86"/><ellipse cx="20" cy="44" rx="17" ry="15" fill="#6b7a86"/></g></symbol></defs></svg>
+<div id="phone">
+<div id="status" style="min-height:34px"></div>
+<div class="screen" id="s1">
+ <div class="top"><span id="bk1"></span><div class="sf"><span id="mg"></span>라잇</div><span id="sl"></span></div>
+ <div class="tabs"><div class="on">인기</div><div>최근</div><div>사용자</div><div>동영상</div><div>사진</div></div>
+ <div class="scroll" id="feed"></div>
+</div>
+<div class="screen" id="s2" hidden>
+ <div class="dh"><button id="bk2"></button><span id="dt">게시</span><span id="mr"></span></div>
+ <div class="scroll" id="det"></div>
+ <div class="rb" id="rb"><svg class="av" style="width:34px;height:34px"><use href="#av"/></svg><input id="ri" placeholder="답글 게시하기" maxlength="280" autocomplete="off"><button id="rp">게시하기</button></div>
+</div>
+<div class="fab" id="fab"></div>
+<nav id="nav"></nav>
+</div>
+<script>
+const I={back:'<path d="M19 12H5M12 19l-7-7 7-7"/>',se:'<circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/>',sl:'<path d="M3 8h12M19 8h2M3 16h2M9 16h12M17 5v6M7 13v6"/>',home:'<path d="M3 11l9-8 9 8v10h-6v-6H9v6H3z"/>',ms:'<circle cx="12" cy="12" r="9"/><path d="M7 19L17 5"/>',bell:'<path d="M6 17v-6a6 6 0 0 1 12 0v6l2 2H4zM10 21h4"/>',chat:'<path d="M4 4h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1h-6l-4 4v-4H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/>',rt:'<path d="M4 10V8a3 3 0 0 1 3-3h11M15 2l3 3-3 3M20 14v2a3 3 0 0 1-3 3H6M9 22l-3-3 3-3"/>',ht:'<path d="M12 20.5S3.5 15 3.5 8.8A4.3 4.3 0 0 1 12 7a4.3 4.3 0 0 1 8.5 1.8C20.5 15 12 20.5 12 20.5z"/>',vw:'<path d="M5 20V11M12 20V4M19 20V9"/>',bm:'<path d="M6 3h12v18l-6-4-6 4z"/>',sh:'<path d="M12 15V3M7 8l5-5 5 5M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/>',pen:'<path d="M3 21l1-5L16 4l4 4L8 20zM13 7l4 4M19 2v4M17 4h4"/>',dots:'<circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/>',x:'<path d="M4 4l16 16M20 4L4 20"/>'};
+const ic=(n,s=19,f='none',w=2)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="${f}" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${I[n]}</svg>`;
+const bdg='<svg width="17" height="17" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1d9bf0"/><path d="M7 12.5l3.2 3.2L17 9" stroke="#fff" stroke-width="2.4" fill="none"/></svg>';
+const $=s=>document.querySelector(s);
+$('#bk1').innerHTML=ic('back',26);$('#bk2').innerHTML=ic('back',24);$('#mg').innerHTML=ic('se',22);$('#sl').innerHTML=ic('sl',24);$('#mr').innerHTML=ic('ms',24)+' '+ic('dots',22,'currentColor',0);$('#fab').innerHTML=ic('pen',26);
+$('#status').insertAdjacentHTML('beforeend','<span class="xl">'+ic('x',22,'none',3)+'</span>');
+$('#nav').innerHTML=`<span>${ic('home',28,'none')}</span><span>${ic('se',28,'none',3)}</span><span>${ic('ms',28)}<i>1</i></span><span>${ic('bell',28)}<i>17</i></span><span>${ic('chat',28)}</span>`;
+
+
+const U=[["졸린","sleepy"],["배고픈","hungry"],["느긋한","slow"],["엉뚱한","odd"],["상큼한","fresh"],["조용한","quiet"]],S=[["감자","potato"],["두부","tofu"],["오리","duck"],["수박","melon"],["구름","cloud"],["다람쥐","squirrel"],["고구마","yam"],["토끼","bunny"],["마카롱","macaron"]];
+let ui=0;const user=()=>{const k=(ui++*7)%54,m=U[k%6],s=S[(k/6)|0];const nk=m[0]+s[0];return{n:nk+(['졸린감자','상큼한마카롱','조용한구름'].includes(nk)?' '+bdg:''),id:m[1]+"_"+s[1]+((k*3+11)%90+9)}};
+
+const P=[
+{t:`라잇이 말한거 정리햇음
+전남친이 하고싶은게 생겻다함
+근데 그걸하려면 라잇이랑 헤어져야햇음
+3년뒤 우연히 다시만남
+그꿈 이룬 상태였음
+오늘처음 본사람 하자
+
+자 여기서 제일 이상한게 도대체 어디서 만낫냐는거임`,l:32000,v:"8.1만",rt:1180,
+rp:[`23년이면 라잇이 회사에서 거의 살던 시기아님?
+127드림유컴백, 라이즈데뷔 다 겹쳤잖아
+그래서 바빳엇던거고 잠깐 라방 켯을 때도
+집에 가는날이면 바로잔다라고 햇엇는데
+
+그럼 덥브이에서 만난겨?`,`오히려 피할 수없는 환경이라
+처음부터 선긋자고 한것 같음
+
+그러면 처음본사람하자가 이해되자너`,`지금 나온 추측들로 보면
+나 알 것 같은데
+다들 누군지 예상가지않나`],
+cm:[["아니 직원이면 굳이 헤어질 이유가 없잖아.",["맞음 내가 없어야 할 수 있는 일 이 말 때문에 더…","아니근데 상대가 연생이거나 아이돌이엿으면 얘기가 달라지지않나","엥..?"]],
+["근데 진짜엿으면 둘다 멘탈 장난아니엇겟다",["녹음실에서 계속 얼굴봐야하는거잖아","프로면 어쩔수없지…","상상만해도 힘들다"]],
+["나도 알것 같음 시기가 맞는 사람 한명밖에 없음",["근데 약간 지역이 문제라.. 밤에 데려줬다고 해서..","야야ㅑ 우리 너무 간다..."]]]},
+{t:`솔직히 이제와서 아니라고 하기엔 너무 겹치는게 많음
+
+라잇이 한 말
+라잇 회사 들어온 시기
+언빤 데뷔 준비 시기
+
+다 맞물리니까 사람들이 말 나오는거지
+그냥 아무 근거 없이 이름 나오는게 아닌데…`,l:34000,v:"6.4만",rt:946,cm:[]},
+{t:`아니 라잇님
+이 얘기를 왜 지금 방송에서 하신건지 모르겠음
+
+본인이 상대 특정 안했다고 해도
+결국 궁예하는 사람들 생길거 뻔한거 아닌가
+
+지금 벌써 멤버 이름 나오고
+라잇 전남친이 누구냐면서
+라이즈까지 끌고오는 글들 올라오는데
+
+우리애들은 아무것도 안했는데
+왜 이런 얘기에 같이 묶여야함
+
+결국 언빤 이름까지 나오고
+우리오빠한테 이상한 말 붙는 것도 싫음
+
+학생때 연애 얘기인건 알겠는데
+굳이 방송에서 꺼내서
+이렇게까지 커지게 만든건 좀 그렇다고 생각함
+
+라잇님도 본인 얘기만 하고 끝낼게 아니라
+지금 상황은 좀 생각해주셨으면 좋겠음`,l:31000,v:"5.2만",rt:870,
+cm:[["라잇이 상대 특정한것도 아닌데 왜 라잇한테만 뭐라함? 궁예해서 언빤 이름 나온건 팬들이잖아",["그래도 방송에서 저런 얘기하면 엮일거 예상은 했어야지","그걸 예상했다고 해도 지금처럼 이름 찾아서 확정짓고 다니는건 다른 문제 아님?"]],
+["솔직히 이건 라잇 잘못이라기보다 궁예가 너무커졋음",["처음엔 다들 추측만 했는데 알티 몇번 타더니 거의 기정사실처럼 됨","이제는 라잇이 언빤 전남친이라고 확정하고 욕하는 글까지 보임","그건 진짜 선 넘은거지"]]]},
+{t:`라잇은 진짜 남돌이랑 엮이는거 너무 좋아하는듯
+
+예전부터 남돌들한테
+은근히 꼬리치고 친분 티내는거 몇번 봤는데
+
+이번에도 결국 남돌 하나 전남친으로 만들어놓고
+탐라 뒤집어짐
+
+상대 특정 안했다고 하면 다임?
+이렇게 될거 뻔히 알면서 방송에서 저런 얘기한거잖아
+술 취할 것 같으면 방송 나오지 말던가
+그냥 회사에서 얌전히 일만 하면 될것이지
+왜 기어나와서 이 짓거리임
+
+누구인지 궁예할거 뻔한 내용 풀어놓고
+결국 우리애 이름까지 나오게 했잖아
+
+관심받고 싶으면 본인 얘기만 하세요
+왜 계속 남돌을 끌어들임?`,l:28000,v:"4.3만",rt:640,
+cm:[["아니 본인이 언빤이라고 한적도 없는데 뭘 전남친으로 만들어놨다는거임?",["ㄹㅇ 궁예한건 팬들인데 왜 라잇이 남돌을 끌어들였다고 함","꼬리친다는 말까지 나오는거 보면 그냥 욕하고 싶었던거같음"]],
+["관심받고 싶으면 본인 얘기만 하세요 이 말이 제일 웃김\n지금까지 남돌 이름 먼저 꺼낸건 누군데",["그러니까ㅋㅋㅋ 라잇은 본인 얘기하고 있었음","언빤 이름 붙인 순간부터 이미 팬들이 판 키운거임"]],
+["라잇 싫어할수는 있는데 없는 사실까지 붙여서 욕하지는 말자",["이게 맞음","궁예랑 사실 구분은 해야지","지금 돌아가는거 보면 이미 구분 안되고있음"]]]},
+{t:`지금 라잇 욕하는 것도 개심함
+
+“티내고 싶은거 아니냐”
+“우리오빠 얼굴에 침뱉지마라”
+
+이런 말은 왜 나오는거임?
+
+본인이 상대 이름 얘기한것도 아니고
+어디서 만났는지 구체적으로 말한것도 아니고
+그냥 자기 인생에서 있었던 연애썰 하나 푼거잖아
+
+정보 없는 얘기 듣고
+팬들이 궁예해서 언빤 이름 붙인건데
+왜 그걸 라잇이 일부러 엮은것처럼 말함?
+
+그리고 진짜 마지막으로
+너네 이런거 좀 하지마라
+추측 언급하지 말고
+확정해서 퍼뜨리지 말고
+악플도 쓰지 마셈
+
+지금 라잇이 덥브이에서 하는 일이 얼마나 많은데
+괜히 이런걸로 사람 하나 지치게 하지마
+라잇 퇴사라도 하면 우리 진짜 망하는거야
+진심으로 적당히 좀 하자`,l:25000,v:"3.1만",rt:512,
+cm:[["ㄹㅇ",["그냥 자기 얘기한건데 이걸 왜 라잇탓함?","라잇 악플 개많아졋더라 안그래도 많앗는데..ㅠ","ㄱㄴㄲ 아니 남돌한테 가서 꼬리친다는게 말이되냐"]],
+["그래도 저런 얘기 방송에서 하면 궁예 나올거 예상은 했어야한다고 봄\n돌판 제일 잘 아는 사람이 왜 그럼?",["예상하는거랑 팬들이 없는 사실까지 만들어서 확정짓는건 다르지","애초에 라잇이 언빤이라고 한적이 없는데 왜 라잇한테 책임을 물음"]],
+["그리고 진짜 라잇 퇴사하면 안됨\n지금 덥브이에서 라잇 빠지면 일 돌아가긴 하냐",["갑자기 현실 걱정이라 웃김ㅋㅋㅋ","아니 근데 ㄹㅇ임 우리 지금 라잇한테 너무 많은걸 맡기고잇음"]]]},
+{t:`아니 근데 라잇 전남친 얘기로
+왜 이렇게까지 싸우는거임
+
+언빤이라고 확정된것도 아니고
+설령 맞다해도 학생때 일반인으로 만났던 전남친이잖아
+
+엔터 들어온 뒤도 아니고
+연생 들어간 뒤도 아니고
+진짜 아무것도 하기 전 학생때 4년 사귄 사람임
+
+헤어진지도 벌써 6년 됐고
+3년 뒤에 한번 다시 만난 뒤로는 아무 얘기도 없었는데
+
+벌써 둘이 뭘 했네 어쩌네
+누가 잘못했네까지 나오는 것도 웃김
+아직 맞는지 아닌지도 모르면서
+
+라잇이 먼저 상대방 특정한것도 아니고
+그냥 별쏟밤에서 자기 인생 얘기 하나 한거 가지고
+팬들이 궁예해서 언빤 이름 붙인거잖아
+
+근데 그걸로 언빤 이름 끌고와서 싸우고
+라잇 욕하고
+없는 얘기까지 만들어내는건 진짜너무 과함
+
+둘이 지금 뭐가 있는것도 아니고
+그냥 학생때 오래 만났던 전남친이 있었다는
+얘기임
+
+제발 여기서 그만하자
+추측은 추측으로 끝내고
+둘한테 없는 이야기 만들지 말자
+
+진짜 너무 과해짐`,l:49000,v:"1.9만",rt:388,cm:[]}];
+const MIN=[300,240,180,120,60,30];
+const ALL=[];let q=0;const lk=x=>{x.l=130+(q++*97)%760;x.on=0;x.id=ALL.push(x)-1};
+const flat=cm=>{const a=[];cm.forEach(c=>{a.push({t:c[0],lv:0});c[1].forEach(r=>a.push({t:r,lv:1}))});return a};
+const T=m=>m<1?"방금":m<60?m+"분":Math.floor(m/60)+"시간";
+P.forEach((p,i)=>{p.u=user();p.m=MIN[i];p.on={h:0,r:0};
+ const stamp=(a,m0)=>{const n=a.length,st=Math.max(2,Math.floor((m0-10)/(n+1)));a.forEach((x,j)=>{x.u=user();x.m=Math.max(1,m0-6-(j+1)*st)})};
+ p.rl=(p.rp||[]).map((t,k)=>({t,lv:0,il:flat([p.cm[k]])}));stamp(p.rl,p.m);p.rl.forEach((r,k)=>{lk(r);r.l=[8400,6200,5100][k];stamp(r.il,r.m);r.il.forEach(lk)});
+ p.il=p.rl.length?[]:flat(p.cm);stamp(p.il,p.m);p.il.forEach(lk);});
+const esc=s=>s.trim().replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const bold=s=>esc(s).replace(/라잇/g,'<b>라잇</b>');
+const fmt=n=>n>=1e4?(n/1e4).toFixed(1).replace('.0','')+'만':n.toLocaleString();
+const btn=(a,i,n,c,on)=>`<button data-a="${a}" data-i="${i}" class="${on?'on ':''}${a=='h'?'h':a=='r'?'r':''}">${ic(n,18,on&&a=='h'?'currentColor':'none')}<span>${c}</span></button>`;
+const bar=(p,i)=>`<div class="bar">${btn('c',i,'chat',cc(p)||'',0)}${btn('r',i,'rt',fmt(p.rt+p.on.r),p.on.r)}${btn('h',i,'ht',fmt(p.l+p.on.h),p.on.h)}<span>${ic('vw',18)}${p.v}</span><span>${ic('bm',18)}</span><span>${ic('sh',18)}</span></div>`;
+const bar2=j=>`<div class="bar"><span>${ic('chat',17)}</span><span>${ic('rt',17)}${j%3?'':(j*3%11)+1}</span><span>${ic('ht',17)}${(j*7)%40+1}</span><span>${ic('vw',17)}${(j*13)%900+100}</span><span>${ic('bm',17)}</span><span>${ic('sh',17)}</span></div>`;
+function feed(){$('#feed').innerHTML=P.map((p,i)=>`<div class="it"><svg class="av"><use href="#av"/></svg><div class="bd"><div class="hd"><b>${p.u.n}</b><span class="m">@${p.u.id} · ${T(p.m)}</span><span style="margin-left:auto;color:var(--fg)">${ic('x',18,'none',2.6)}</span></div><div class="tx">${bold(p.t)}</div>${bar(p,i)}</div></div>`).join('')}
+let cur=null,mode='c';
+function itemOld(x,j){return`<div class="it ${x.lv?'re':''}"><svg class="av"><use href="#av"/></svg><div class="bd"><div class="hd"><b>${x.u.n}</b><span class="m">@${x.u.id} · ${T(x.m)}</span></div><div class="tx">${esc(x.t)}</div>${bar2(j+1)}</div></div>`}
+function detailOld(){const p=P[cur],d=new Date(Date.now()-p.m*6e4),pad=n=>String(n).padStart(2,'0');
+ const L=mode=='c'?p.il:p.rl;$('#dt').textContent=mode=='c'?'게시':'인용';
+ $('#det').innerHTML=`<div class="big"><div style="display:flex;align-items:center;gap:10px"><svg class="av"><use href="#av"/></svg><div style="flex:1"><b>${p.u.n}</b><div class="m">@${p.u.id}</div></div><span class="fl">팔로우</span></div><div class="tx">${bold(p.t)}</div><div class="meta">${pad(d.getHours())}:${pad(d.getMinutes())} · ${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}. · 조회 <b style="color:var(--fg)">${p.v}</b>회</div>${bar(p,cur)}</div>${L.map(item).join('')}<div class="more">더 찾아보기</div>`}
+const cc=p=>p.il.length;
+const ibar=(x,j,ch)=>`<div class="bar">${ch?`<button data-a="ic" data-x="${x.id}">${ic('chat',17)}<span>${x.il.length}</span></button>`:`<span>${ic('chat',17)}</span>`}<span>${ic('rt',17)}${j%3?'':(j*3%11)+1}</span><button data-a="ih" data-x="${x.id}" class="h${x.on?' on':''}">${ic('ht',17,x.on?'currentColor':'none')}<span>${fmt(x.l+x.on)}</span></button><span>${ic('vw',17)}${(j*13)%900+100}</span><span>${ic('bm',17)}</span><span>${ic('sh',17)}</span></div>`;
+function item(x,j,ch){return`<div class="it ${x.lv?'re':''}"><svg class="av"><use href="#av"/></svg><div class="bd"><div class="hd"><b>${x.u.n}</b><span class="m">@${x.u.id} · ${T(x.m)}</span></div><div class="tx">${esc(x.t)}</div>${ibar(x,j+1,ch)}</div></div>`}
+let rep=null;
+function detailV1(){const p=P[cur],pad=n=>String(n).padStart(2,'0'),rc=mode=='rc',src=rc?rep:p,L=rc?rep.il:mode=='r'?p.rl:p.il,ch=mode=='r'?1:0,d=new Date(Date.now()-src.m*6e4);
+ $('#dt').textContent=mode=='c'?'게시':mode=='r'?'인용':'답글';
+ $('#det').innerHTML=`<div class="big"><div style="display:flex;align-items:center;gap:10px"><svg class="av"><use href="#av"/></svg><div style="flex:1"><b>${src.u.n}</b><div class="m">@${src.u.id}</div></div><span class="fl">팔로우</span></div><div class="tx">${rc?esc(rep.t):bold(p.t)}</div><div class="meta">${pad(d.getHours())}:${pad(d.getMinutes())} · ${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}. · 조회 <b style="color:var(--fg)">${rc?'1.2만':p.v}</b>회</div>${rc?ibar(rep,0,0):bar(p,cur)}</div>${L.map((x,j)=>item(x,j,ch)).join('')}<div class="more">더 찾아보기</div>`}
+I.sort='<path d="M7 4v16M3 16l4 4 4-4M17 20V4M13 8l4-4 4 4"/>';
+const qcard=(p,f)=>`<div class="qc"><div class="hd"><svg class="av" style="width:22px;height:22px"><use href="#av"/></svg><b>${p.u.n}</b><span class="m">@${p.u.id} · ${T(p.m)}</span></div><div class="tx${f?'':' qt'}">${bold(p.t)}</div></div>`;
+function detail(){const p=P[cur],pad=n=>String(n).padStart(2,'0'),rc=mode=='rc',r=mode=='r',src=rc?rep:p,L=rc?rep.il:r?p.rl:p.il,d=new Date(Date.now()-src.m*6e4);
+ $('#dt').textContent=r?'게시 활동':'게시';
+ $('#mr').innerHTML=r?ic('sort',24):rc?ic('dots',22,'currentColor',0):ic('ms',24)+' '+ic('dots',22,'currentColor',0);
+ $('#rb').hidden=r;
+ if(r){$('#det').innerHTML=`<div class="tabs st"><div class="on">${ic('pen',19)} 인용</div><div>재게시</div></div>`+L.map((x,j)=>`<div class="it"><svg class="av"><use href="#av"/></svg><div class="bd"><div class="hd"><b>${x.u.n}</b><span class="m">@${x.u.id} · ${T(x.m)}</span><span style="margin-left:auto;color:var(--fg)">${ic('x',18,'none',2.6)}</span></div><div class="tx">${esc(x.t)}</div>${qcard(p)}${ibar(x,j+1,1)}</div></div>`).join('');return}
+ $('#det').innerHTML=`<div class="big"><div style="display:flex;align-items:center;gap:10px"><svg class="av"><use href="#av"/></svg><div style="flex:1"><b>${src.u.n}</b><div class="m">@${src.u.id}</div></div>${rc?'<b style="font-size:20px">X.com</b>':'<span class="fl">팔로우</span>'}</div><div class="tx">${rc?esc(rep.t):bold(p.t)}</div>${rc?qcard(p,1):''}<div class="meta">${pad(d.getHours())}:${pad(d.getMinutes())} · ${d.getFullYear()}. ${d.getMonth()+1}. ${d.getDate()}. · 조회 <b style="color:var(--fg)">${rc?'1.2만':p.v}</b>회</div>${rc?ibar(rep,0,0):bar(p,cur)}</div>${L.map((x,j)=>item(x,j,0)).join('')}<div class="more">더 찾아보기</div>`}
+const openD=(i,m,r)=>{cur=i;mode=m;rep=r||null;$('#s1').hidden=true;$('#s2').hidden=false;$('#fab').hidden=true;detail();$('#det').scrollTop=0};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');
+ if(b){const a=b.dataset.a;
+  if(a=='ih'){const x=ALL[+b.dataset.x];x.on^=1}
+  else if(a=='ic'){openD(cur,'rc',ALL[+b.dataset.x]);return}
+  else{const i=+b.dataset.i,p=P[i];
+   if(a=='h')p.on.h^=1;
+   else if(a=='r'){if(p.rl.length){openD(i,'r');return}p.on.r^=1}
+   else{openD(i,'c');return}}
+  feed();if(!$('#s2').hidden)detail();return}
+ if(e.target.closest('#bk2')){if(mode=='rc'){mode='r';rep=null;detail();$('#det').scrollTop=0}else{$('#s2').hidden=true;$('#s1').hidden=false;$('#fab').hidden=false;feed()}}});
+const ri=$('#ri'),rp=$('#rp');
+ri.addEventListener('input',()=>rp.classList.toggle('on',!!ri.value.trim()));
+const post=()=>{const t=ri.value.trim();if(!t||$('#s2').hidden||mode=='r')return;const x={t,lv:0,u:{n:'희주',id:'briize'},m:0,il:[]};lk(x);x.l=0;(mode=='rc'?rep:P[cur]).il.push(x);ri.value='';rp.classList.remove('on');detail();$('#det').scrollTop=$('#det').scrollHeight};
+rp.addEventListener('click',post);ri.addEventListener('keydown',e=>{if(e.key=='Enter'&&!e.isComposing)post()});
+feed();
+</script></body></html>
